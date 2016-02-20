@@ -1,15 +1,28 @@
 <html>
-  <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="js/main.js"> </script> 
-    <script src="https://apis.google.com/js/client.js?onload=checkAuthInputs"></script>
-    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
-  </head>
-  <body>
+    <head>
+        <title>GetGo: Start a new habit</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="js/main.js"> </script>
+        <script src="https://apis.google.com/js/client.js?onload=checkAuthInputs"></script>
+        <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,500' rel='stylesheet' type='text/css'>
+    </head>
 
-  Habit: <input id='habit' type="text" name="habit"><br>
-  Time (mins):   <input id='time' type="number" min="0" max="180" step="10" value="60"><br>
-  <input type="submit" value="Submit" onclick="handleInputSubmit()">
+    <body>
+        <div id="habitQ">
+            <h2>What's your new habit?</h2>
+            <p>
+                <input id='habit' type="text" name="habit">
+            </p>
+        </div>
 
-  </body>
+        <div id="timeQ">
+            <h2>How many minutes does the habit take?</h2>
+            <p>
+                <input id='time' type="number" min="0" max="180" step="10" value="60">
+            </p>
+            <p>
+                <input type="submit" value="Submit" onclick="handleInputSubmit()">
+            </p>
+    </body>
 </html>
