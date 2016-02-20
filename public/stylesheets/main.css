@@ -25,3 +25,36 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+/* CSS for input.ejs */
+
+body {
+    margin: auto;
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(#FFF5DE, #ff5606);
+
+}
+
+div {
+    margin: auto;
+    padding: 30px;
+    width: 500px;
+    text-align: center;
+}
+
+h2 {
+
+}
+
+input {
+    border: none;
+    padding: 10px;
+}
+
+#time, #habit {
+    border-bottom: solid 3px #000000;
+    background: 0%;
+    transition: border 0.3s;
+    font-size: 30px;
+    text-align: center;
+    width: 300px;
+}
