@@ -5,33 +5,49 @@ var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 /**
  * Check if current user has authorized this application.
  */
-function checkAuth() {
+function checkAuthLogin() {
   gapi.auth.authorize(
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
       'immediate': true
-    }, handleAuthResult);
+    }, handleAuthResultLogin);
 }
 
+function checkAuthInputs() {
+  gapi.auth.authorize(
+    {
+      'client_id': CLIENT_ID,
+      'scope': SCOPES.join(' '),
+      'immediate': true
+    }, handleAuthResultInputs);
+}
 /**
  * Handle response from authorization server.
  *
  * @param {Object} authResult Authorization result.
  */
-function handleAuthResult(authResult) {
-  var authorizeDiv = document.getElementById('authorize-div');
+function handleAuthResultLogin(authResult) {
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
-    authorizeDiv.style.display = 'none';
-    loadCalendarApi();
-  } else {
-    // Show auth UI, allowing the user to initiate authorization by
-    // clicking authorize button.
-    authorizeDiv.style.display = 'inline';
+    // authorizeDiv.style.display = 'none';
+    // loadCalendarApi();
+    window.location = '/inputs';
   }
 }
 
+function handleAuthResultInputs(authResult) {
+  if (authResult && !authResult.error) {
+    // Hide auth UI, then load client library.
+    // authorizeDiv.style.display = 'none';
+    // loadCalendarApi();
+
+  } else {
+    // Show auth UI, allowing the user to initiate authorization by
+    // clicking authorize button.
+    window.location = '/';
+  }
+}
 /**
  * Initiate auth flow in response to user clicking authorize button.
  *
@@ -40,7 +56,7 @@ function handleAuthResult(authResult) {
 function handleAuthClick(event) {
   gapi.auth.authorize(
     {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-    handleAuthResult);
+    handleAuthResultLogin);
   return false;
 }
 
@@ -71,6 +87,7 @@ function listUpcomingEvents() {
     var events = resp.items;
     appendPre('Upcoming events:');
 
+    console.log(events);
     if (events.length > 0) {
       for (i = 0; i < events.length; i++) {
         var event = events[i];
@@ -81,6 +98,7 @@ function listUpcomingEvents() {
         appendPre(event.summary + ' (' + when + ')')
       }
     } else {
+
       appendPre('No upcoming events found.');
     }
 
@@ -93,7 +111,18 @@ function listUpcomingEvents() {
  *
  * @param {string} message Text to be placed in pre element.
  */
+
+function handleInputSubmit() {
+  // use Jquery to get inputs on page
+  // get calendar events for the next week
+  //scan through calendar events to find where to place new events
+  //send request to google to add new events
+  //display new events to user
+},
+
 function appendPre(message) {
+  //send message to display page
+
   var pre = document.getElementById('output');
   var textContent = document.createTextNode(message + '\n');
   pre.appendChild(textContent);

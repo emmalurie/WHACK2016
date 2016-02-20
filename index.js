@@ -1,3 +1,4 @@
+//core, renders webpage 
 var express = require('express');
 var app = express();
 
@@ -11,6 +12,10 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   response.render('pages/index');
+});
+
+app.get('/inputs', function(request, response) {
+  response.render('pages/inputs');
 });
 
 app.listen(app.get('port'), function() {
