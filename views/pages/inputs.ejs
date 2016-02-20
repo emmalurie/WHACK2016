@@ -1,13 +1,14 @@
 <html>
   <head>
-    <script src="js/main.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="js/main.js"> </script> 
     <script src="https://apis.google.com/js/client.js?onload=checkAuthInputs"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
   </head>
   <body>
 
   Habit: <input id='habit' type="text" name="habit"><br>
-  Time: <input id='time' type="text" name="time"><br>
+  Time (mins):   <input id='time' type="number" min="0" max="180" step="10" value="60"><br>
   <input type="submit" value="Submit" onclick="handleInputSubmit()">
 
   </body>

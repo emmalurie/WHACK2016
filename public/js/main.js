@@ -36,12 +36,12 @@ function handleAuthResultLogin(authResult) {
   }
 }
 
+
 function handleAuthResultInputs(authResult) {
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
     // authorizeDiv.style.display = 'none';
-    // loadCalendarApi();
-
+     loadCalendarApi();
   } else {
     // Show auth UI, allowing the user to initiate authorization by
     // clicking authorize button.
@@ -85,7 +85,6 @@ function listUpcomingEvents() {
 
   request.execute(function(resp) {
     var events = resp.items;
-    appendPre('Upcoming events:');
 
     console.log(events);
     if (events.length > 0) {
@@ -114,6 +113,10 @@ function listUpcomingEvents() {
 
 function handleInputSubmit() {
   // use Jquery to get inputs on page
+  var habit =jQuery("#habit").val();
+  var time = jQuery("#time").val();
+  console.log(habit);
+  console.log(time); 
   // get calendar events for the next week
   //scan through calendar events to find where to place new events
   //send request to google to add new events
