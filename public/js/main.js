@@ -118,7 +118,8 @@ function handleInputSubmit() {
   //scan through calendar events to find where to place new events
   //send request to google to add new events
   //display new events to user
-},
+  return null;
+}
 
 function appendPre(message) {
   //send message to display page
