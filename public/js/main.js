@@ -10,8 +10,7 @@ function checkAuthLogin() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true,
-      cookie_policy: 'single_host_origin'
+      'immediate': true
 
     }, handleAuthResultLogin);
 }
@@ -21,9 +20,9 @@ function checkAuthInputs() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true,
-      cookie_policy: 'single_host_origin'
-    }, handleAuthResultInputs);
+      'immediate': true
+      
+      }, handleAuthResultInputs);
 }
 
 function signOut() {
@@ -174,6 +173,15 @@ function addToCalendar(event){
   });
 }
 
+function onHover()
+{
+    $("#menuImg").attr('src', 'http://i.imgur.com/T6pcuBK.png');
+}
+
+function offHover()
+{
+    $("#menuImg").attr('src', 'http://i.imgur.com/23tEUCZ.png?1');
+}
 
 /**
  * Append a pre element to the body containing the given message
