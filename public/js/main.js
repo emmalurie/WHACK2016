@@ -90,70 +90,71 @@ function listUpcomingEvents() {
 
   request.execute(function(resp) {
     var events = resp.items;
-
-    console.log(events);
     var habit =jQuery("#habit").val();
     var time = parseInt(jQuery("#time").val(), 10);
-    
-
     var start; 
-    var end; 
+    var end;  
 
-    console.log(habit);
-    console.log(time); 
-
-    var newEvents = [];
-      //console.log(data);
+    var newEvent; 
     for (i = 1; i < events.length; i++){
-      console.log(events[i]);
       end = new Date(events[i - 1]["end"]["dateTime"]);
       start = new Date(events[i]["start"]["dateTime"]);
-      console.log(enoughTime(end, start, time));
       var enough = enoughTime(end, start, time);
-
-
-     //start = data[i]["start"]["dateTime"];
+      if (enough != null){
+       newEvent = enough;
+       break;
+      }
     }
-   
+    var eventToAdd = createNewEvent(newEvent,time, habit);
+    console.log(eventToAdd);
+    });
+  }
 
-    //succesfful adding of event
-
-
-
-    // if (events.length > 0) {
-    //   for (i = 0; i < events.length; i++) {
-    //     var event = events[i];
-    //     var when = event.start.dateTime;
-    //     if (!when) {
-    //       when = event.start.date;
-    //     }
-    //     appendPre(event.summary + ' (' + when + ')')
-    //   }
-    // } 
-
-  });
   function enoughTime(event1, event2, timeSpan){
-    debugger
-    if (event1.getDate()===(event2.getDate())){
-      var time1 = (event1.getHours() * 60) + (event1.getMinutes());
-      var time2 = (event2.getHours() * 60) + (event2.getMinutes());
-     // var newDate = new Date();
+    var newDate = event1;
 
-      if (time2 - time1 > timeSpan){
-       return newDate(event1.getHours()); 
+    if (event1.getDate()===(event2.getDate())){
+
+      if ((event1 - event2)/ 60000 > timeSpan){
+       return newDate; 
       } else {
       return null;
       }
 
-    } else if(event1.getHours() + timeSpan < 22){
-        return newDate(event1.getHours()); 
-    } else if (event2.getHours - timeSpan > 7){
-        return newDate(event2.getHours()); 
+    } else if(event1.getHours() + (timeSpan / 60) < 22){
+        return newDate; 
+    } else if (event2.getHours - (timeSpan /60) > 7){
+        newDate = event2;
+        return newDate; 
     } else {
-      return false; 
+      return null; 
     }
   }
-}
+
+  function createNewEvent(date,timeSpan,habit){
+    var start = new Date(date);
+    var end = new Date(date.setMinutes(date.getMinutes() + timeSpan));
+    console.log(start);
+    console.log(end);
+    var event = {
+      'summary': habit,
+      'description': 'Your GetGo goal!',
+      'start': {
+        'dateTime': start.toISOString(),
+        'timeZone': start.getTimezoneOffset()
+      },
+      'end': {
+        'dateTime': end.toISOString(),
+        'timeZone': end.getTimezoneOffset()
+      },
+    };
+
+    return event;
+
+   // events.insert('primary', );
+
+  }
+
 
 /**
  * Append a pre element to the body containing the given message
