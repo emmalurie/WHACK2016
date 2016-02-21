@@ -111,7 +111,10 @@ function listUpcomingEvents() {
   });
 }
 
-function enoughTime(event1, event2, timeSpan){
+function enoughTime(eventOne, eventTwo, timeSpan){
+    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15)); 
+    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15)); 
+
   if (event1.getDate()===(event2.getDate())){
     if ((event2 - event1)/ 60000 > timeSpan){
       return event1;
