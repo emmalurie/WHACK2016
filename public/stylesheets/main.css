@@ -1,45 +1,32 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
 
 /* CSS for input.ejs */
 
 body {
-    margin: auto;
     font-family: 'Raleway', sans-serif;
-    background: linear-gradient(#FFF5DE, #ff5606);
+    /*background: linear-gradient(to bottom, #FFF5DE, #FFF5DE, #FFF5DE, #F58C5B, #ff5606);*/
+    background: #ff5606;
 
+}
+
+#questions {
+  margin: auto;
+    padding: 30px;
+    width: 500px;
+    margin-top: 20px;
+    text-align: center;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px #5a5a5a;
 }
 
 div {
     margin: auto;
     padding: 30px;
-    width: 500px;
     text-align: center;
+    color: #000000;
+    /*margin-top: 50px;*/
 }
+
 
 h2 {
 
@@ -50,6 +37,10 @@ input {
     padding: 10px;
 }
 
+#habitsP {
+    padding-bottom: 70px;
+}
+
 #time, #habit {
     border-bottom: solid 3px #000000;
     background: 0%;
@@ -57,4 +48,13 @@ input {
     font-size: 30px;
     text-align: center;
     width: 300px;
+}
+
+img.resize{
+   max-width:50%;
+   max-height:50%;
+
+  }
+input:focus {
+    outline: none;
 }
