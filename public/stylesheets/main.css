@@ -3,7 +3,8 @@
 
 body {
     font-family: 'Raleway', sans-serif;
-    background: linear-gradient(to bottom, #FFF5DE, #FFF5DE, #FFF5DE, #F58C5B, #ff5606);
+    /*background: linear-gradient(to bottom, #FFF5DE, #FFF5DE, #FFF5DE, #F58C5B, #ff5606);*/
+    background: #ff5606;
 
 }
 
