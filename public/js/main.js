@@ -107,53 +107,60 @@ function listUpcomingEvents() {
     }
     var eventToAdd = createNewEvent(newEvent,time, habit);
     console.log(eventToAdd);
-    });
-  }
+    addToCalendar(eventToAdd);
+  });
+}
 
-  function enoughTime(event1, event2, timeSpan){
-    var newDate = event1;
-
-    if (event1.getDate()===(event2.getDate())){
-
-      if ((event1 - event2)/ 60000 > timeSpan){
-       return newDate; 
-      } else {
+function enoughTime(event1, event2, timeSpan){
+  if (event1.getDate()===(event2.getDate())){
+    if ((event2 - event1)/ 60000 > timeSpan){
+      return event1;
+    }else {
       return null;
-      }
-
-    } else if(event1.getHours() + (timeSpan / 60) < 22){
-        return newDate; 
-    } else if (event2.getHours - (timeSpan /60) > 7){
-        newDate = event2;
-        return newDate; 
-    } else {
-      return null; 
     }
+  } else if(event1.getHours() + (timeSpan / 60) < 22){
+      return event1; 
+  } else if (event2.getHours() - (timeSpan /60) > 7){
+      return new Date(event2.setMinutes(date.getMinutes() - timeSpan)); 
+  } else {
+    return null; 
   }
+}
 
-  function createNewEvent(date,timeSpan,habit){
-    var start = new Date(date);
-    var end = new Date(date.setMinutes(date.getMinutes() + timeSpan));
-    console.log(start);
-    console.log(end);
-    var event = {
-      'summary': habit,
-      'description': 'Your GetGo goal!',
-      'start': {
-        'dateTime': start.toISOString(),
-        'timeZone': start.getTimezoneOffset()
-      },
-      'end': {
-        'dateTime': end.toISOString(),
-        'timeZone': end.getTimezoneOffset()
-      },
-    };
+function createNewEvent(date,timeSpan,habit){
+  var start = new Date(date);
+  var end = new Date(date.setMinutes(date.getMinutes() + timeSpan));
+  console.log(start);
+  console.log(end);
+  var event = {
+    'summary': habit,
+    'description': 'Your GetGo goal!',
+    'start': {
+      'dateTime': start.toISOString(),
+      'timeZone': 'America/New_York'
+    },
+    'end': {
+      'dateTime': end.toISOString(),
+      'timeZone': 'America/New_York'
+    },
+  };
 
-    return event;
+  return event;
 
-   // events.insert('primary', );
 
-  }
+}
+
+function addToCalendar(event){
+  var request = gapi.client.calendar.events.insert({
+  'calendarId': 'primary',
+  'resource': event
+  });
+
+  request.execute(function(event) {
+    console.log('Event created: ' + event.htmlLink);
+    window.location = '/congrats';
+  });
+}
 
 
 /**
@@ -163,12 +170,3 @@ function listUpcomingEvents() {
  * @param {string} message Text to be placed in pre element.
  */
 
-
-
-// function appendPre(message) {
-//   //send message to display page
-
-//   var pre = document.getElementById('output');
-//   var textContent = document.createTextNode(message + '\n');
-//   pre.appendChild(textContent);
-// }
