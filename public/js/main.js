@@ -94,22 +94,36 @@ function listUpcomingEvents() {
     var time = parseInt(jQuery("#time").val(), 10);
     var start; 
     var end;  
+    var newEvents = []; 
 
-    var newEvent; 
+
+
+
     for (i = 1; i < events.length; i++){
       end = new Date(events[i - 1]["end"]["dateTime"]);
       start = new Date(events[i]["start"]["dateTime"]);
       var enough = enoughTime(end, start, time);
-      if (enough != null){
-       newEvent = enough;
-       break;
+      if (enough != null ) {
+        if (newEvents.length === 0 || enough.getDate() != newEvents[newEvents.length - 1].getDate()) {
+          newEvents.push(enough);
+        }
+        if (newEvents.length >= 3 ){
+          break;
+       }
       }
     }
-    var eventToAdd = createNewEvent(newEvent,time, habit);
-    console.log(eventToAdd);
-    addToCalendar(eventToAdd);
+
+    for (i = 0; i < newEvents.length; i++) {
+      addToCalendar(createNewEvent(newEvents[i], time, habit));
+    }
+
+    window.location = '/congrats';
   });
+
 }
+
+
+
 
 function enoughTime(eventOne, eventTwo, timeSpan){
     var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15)); 
@@ -121,9 +135,9 @@ function enoughTime(eventOne, eventTwo, timeSpan){
     }else {
       return null;
     }
-  } else if(event1.getHours() + (timeSpan / 60) < 22){
+  } else if(event1.getHours() + (timeSpan / 60)  + 0.25 < 22){
       return event1; 
-  } else if (event2.getHours() - (timeSpan /60) > 7){
+  } else if (event2.getHours() - (timeSpan /60) - 0.25 > 7){
       return new Date(event2.setMinutes(event2.getMinutes() - timeSpan)); 
   } else {
     return null; 
@@ -161,7 +175,6 @@ function addToCalendar(event){
 
   request.execute(function(event) {
     console.log('Event created: ' + event.htmlLink);
-    window.location = '/congrats';
   });
 }
 
