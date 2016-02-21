@@ -7,11 +7,11 @@ body {
 
 }
 
-#questions {
+.questions {
   margin: auto;
     padding: 30px;
     width: 500px;
-    margin-top: 20px;
+    margin-top: 80px;
     text-align: center;
     background: white;
     border-radius: 5px;
@@ -26,6 +26,17 @@ div {
     /*margin-top: 50px;*/
 }
 
+#welcome {
+  font-size: 24px;
+}
+
+#title {
+  color: white;
+  padding-left: 20px;
+  margin-top: 20;
+  font-weight: bold;
+  font-size: 24px;
+}
 
 h2 {
 
