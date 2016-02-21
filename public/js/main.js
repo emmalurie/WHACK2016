@@ -120,7 +120,10 @@ function listUpcomingEvents() {
   });
 }
 
-function enoughTime(event1, event2, timeSpan){
+function enoughTime(eventOne, eventTwo, timeSpan){
+    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15)); 
+    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15)); 
+
   if (event1.getDate()===(event2.getDate())){
     if ((event2 - event1)/ 60000 > timeSpan){
       return event1;
@@ -130,7 +133,7 @@ function enoughTime(event1, event2, timeSpan){
   } else if(event1.getHours() + (timeSpan / 60) < 22){
       return event1; 
   } else if (event2.getHours() - (timeSpan /60) > 7){
-      return new Date(event2.setMinutes(date.getMinutes() - timeSpan)); 
+      return new Date(event2.setMinutes(event2.getMinutes() - timeSpan)); 
   } else {
     return null; 
   }
