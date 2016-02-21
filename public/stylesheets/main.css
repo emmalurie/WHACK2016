@@ -34,10 +34,20 @@ body {
 
 }
 
+#questions {
+  margin: auto;
+    padding: 30px;
+    width: 500px;
+    margin-top: 20px;
+    text-align: center;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px #5a5a5a;
+}
+
 div {
     margin: auto;
     padding: 30px;
-    width: 500px;
     text-align: center;
 }
 
@@ -57,4 +67,9 @@ input {
     font-size: 30px;
     text-align: center;
     width: 300px;
+}
+
+img.resize{
+   max-width:50%;
+   max-height:50%;
 }
