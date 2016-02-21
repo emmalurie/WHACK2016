@@ -10,8 +10,7 @@ function checkAuthLogin() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true,
-      cookie_policy: 'single_host_origin'
+      'immediate': true
 
     }, handleAuthResultLogin);
 }
@@ -21,9 +20,9 @@ function checkAuthInputs() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true,
-      cookie_policy: 'single_host_origin'
-    }, handleAuthResultInputs);
+      'immediate': true
+      
+      }, handleAuthResultInputs);
 }
 
 function signOut() {
