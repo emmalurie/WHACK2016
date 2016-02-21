@@ -25,21 +25,28 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+
+
 /* CSS for input.ejs */
 
 body {
-    margin: auto;
     font-family: 'Raleway', sans-serif;
-    background: linear-gradient(#FFF5DE, #ff5606);
+    background: linear-gradient(to bottom, #FFF5DE, #FFF5DE, #FFF5DE, #F58C5B, #ff5606);
 
 }
 
-div {
+#questions {
     margin: auto;
     padding: 30px;
     width: 500px;
     text-align: center;
+    background-color: #FFF5DE;
+    box-shadow: 10px 10px 50px brown;
+
+    color: #ff5606;
+    /*margin-top: 50px;*/
 }
+
 
 h2 {
 
@@ -50,6 +57,10 @@ input {
     padding: 10px;
 }
 
+#habitsP {
+    padding-bottom: 70px;
+}
+
 #time, #habit {
     border-bottom: solid 3px #000000;
     background: 0%;
@@ -57,4 +68,8 @@ input {
     font-size: 30px;
     text-align: center;
     width: 300px;
+}
+
+input:focus {
+    outline: none;
 }

@@ -9,14 +9,12 @@
     </head>
 
     <body>
-        <div id="habitQ">
+        <div id="questions">
             <h2>What's your new habit?</h2>
-            <p>
+            <p id="habitsP">
                 <input id='habit' type="text" name="habit">
             </p>
-        </div>
 
-        <div id="timeQ">
             <h2>How many minutes does the habit take?</h2>
             <p>
                 <input id='time' type="number" min="0" max="180" step="10" value="60">
@@ -24,5 +22,6 @@
             <p>
                 <input type="submit" value="Submit" onclick="handleInputSubmit()">
             </p>
+        </div>
     </body>
 </html>
