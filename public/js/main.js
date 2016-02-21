@@ -10,7 +10,9 @@ function checkAuthLogin() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
+
     }, handleAuthResultLogin);
 }
 
@@ -19,9 +21,16 @@ function checkAuthInputs() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
     }, handleAuthResultInputs);
 }
+
+function signOut() {
+  console.log("signing out");
+  gapi.auth.signOut();
+}
+
 /**
  * Handle response from authorization server.
  *
@@ -61,7 +70,7 @@ function handleAuthClick(event) {
 function handleInputSubmit() {
   // use Jquery to get inputs on page
   startCalendarScan();
-  
+
   // get calendar events for the next week
   //scan through calendar events to find where to place new events
   //send request to google to add new events
@@ -96,9 +105,6 @@ function listUpcomingEvents() {
     var end;  
     var newEvents = []; 
 
-
-
-
     for (i = 1; i < events.length; i++){
       end = new Date(events[i - 1]["end"]["dateTime"]);
       start = new Date(events[i]["start"]["dateTime"]);
@@ -126,8 +132,8 @@ function listUpcomingEvents() {
 
 
 function enoughTime(eventOne, eventTwo, timeSpan){
-    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15)); 
-    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15)); 
+    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15));
+    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15));
 
   if (event1.getDate()===(event2.getDate())){
     if ((event2 - event1)/ 60000 > timeSpan){
@@ -140,7 +146,7 @@ function enoughTime(eventOne, eventTwo, timeSpan){
   } else if (event2.getHours() - (timeSpan /60) - 0.25 > 7){
       return new Date(event2.setMinutes(event2.getMinutes() - timeSpan)); 
   } else {
-    return null; 
+    return null;
   }
 }
 
@@ -185,4 +191,3 @@ function addToCalendar(event){
  *
  * @param {string} message Text to be placed in pre element.
  */
-

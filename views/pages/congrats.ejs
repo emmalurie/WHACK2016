@@ -1,29 +1,36 @@
 <html>
     <head>
-        <title>GetGo: Start a new habit</title>
+        <title>GetGo: Congrats!</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="js/main.js"> </script>
         <script src="https://apis.google.com/js/client.js?onload=checkAuthInputs"></script>
+                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,500' rel='stylesheet' type='text/css'>
     </head>
 
     <body>
+    <p class="title">GetGo</p>
      <div class="questions">
-     <img src="http://i.imgur.com/23tEUCZ.png?1" class="resize">
+<div id="menu" >
+  <a href="#" id="home">
+    <img id="menuImg" src="http://i.imgur.com/23tEUCZ.png?1g" alt="logo" width="250px" height="250px" onmouseover="onHover();"
+      onmouseout="offHover();" />
+  </a>
+</div>
              <h2> <a href="http://www.urbandictionary.com/define.php?term=GG" > GG! </a> </h2>
 
-            <p id="congratS">
+            <p>
 
              <h2> You've started a new habit! </h2>
             </p>
 
             <p>
-              <h2> Now Get up and <a href="http://calendar.google.com"> Go </a> </h2>
+              <button type="button" class="btn btn-info" onclick="window.location.href='http://calendar.google.com'"> Go to your Google Calendar! </button>
             </p>
-           <br> </br>
            <hr>
-           <h2> Want to add another <a href="http://localhost:8000/inputs"> one? </a> </h2>
+           <p> Why not add another one? </a> </p>
+           <button type="button" class="btn btn-success" onclick="window.location.href='/inputs'"> New Habit </button>
         </div>
     </body>
 </html>
