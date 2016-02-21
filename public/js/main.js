@@ -173,6 +173,15 @@ function addToCalendar(event){
   });
 }
 
+function onHover()
+{
+    $("#menuImg").attr('src', 'http://i.imgur.com/T6pcuBK.png');
+}
+
+function offHover()
+{
+    $("#menuImg").attr('src', 'http://i.imgur.com/23tEUCZ.png?1');
+}
 
 /**
  * Append a pre element to the body containing the given message
