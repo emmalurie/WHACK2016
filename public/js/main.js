@@ -10,7 +10,9 @@ function checkAuthLogin() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
+
     }, handleAuthResultLogin);
 }
 
@@ -19,9 +21,16 @@ function checkAuthInputs() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
     }, handleAuthResultInputs);
 }
+
+function signOut() {
+  console.log("signing out");
+  gapi.auth.signOut();
+}
+
 /**
  * Handle response from authorization server.
  *
