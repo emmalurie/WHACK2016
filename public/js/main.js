@@ -38,13 +38,7 @@ function handleAuthResultLogin(authResult) {
 
 
 function handleAuthResultInputs(authResult) {
-  if (authResult && !authResult.error) {
-    // Hide auth UI, then load client library.
-    // authorizeDiv.style.display = 'none';
-     loadCalendarApi();
-  } else {
-    // Show auth UI, allowing the user to initiate authorization by
-    // clicking authorize button.
+  if (!(authResult && !authResult.error)) {
     window.location = '/';
   }
 }
@@ -64,7 +58,18 @@ function handleAuthClick(event) {
  * Load Google Calendar client library. List upcoming events
  * once client library is loaded.
  */
-function loadCalendarApi() {
+function handleInputSubmit() {
+  // use Jquery to get inputs on page
+  startCalendarScan();
+  
+  // get calendar events for the next week
+  //scan through calendar events to find where to place new events
+  //send request to google to add new events
+  //display new events to user
+  return null;
+}
+
+function startCalendarScan() {
   gapi.client.load('calendar', 'v3', listUpcomingEvents);
 }
 
@@ -79,30 +84,77 @@ function listUpcomingEvents() {
     'timeMin': (new Date()).toISOString(),
     'showDeleted': false,
     'singleEvents': true,
-    'maxResults': 10,
+    'maxResults': 100,
     'orderBy': 'startTime'
   });
 
   request.execute(function(resp) {
     var events = resp.items;
+    var habit =jQuery("#habit").val();
+    var time = parseInt(jQuery("#time").val(), 10);
+    var start; 
+    var end;  
 
-    console.log(events);
-    if (events.length > 0) {
-      for (i = 0; i < events.length; i++) {
-        var event = events[i];
-        var when = event.start.dateTime;
-        if (!when) {
-          when = event.start.date;
-        }
-        appendPre(event.summary + ' (' + when + ')')
+    var newEvent; 
+    for (i = 1; i < events.length; i++){
+      end = new Date(events[i - 1]["end"]["dateTime"]);
+      start = new Date(events[i]["start"]["dateTime"]);
+      var enough = enoughTime(end, start, time);
+      if (enough != null){
+       newEvent = enough;
+       break;
       }
-    } else {
-
-      appendPre('No upcoming events found.');
     }
+    var eventToAdd = createNewEvent(newEvent,time, habit);
+    console.log(eventToAdd);
+    });
+  }
 
-  });
-}
+  function enoughTime(event1, event2, timeSpan){
+    var newDate = event1;
+
+    if (event1.getDate()===(event2.getDate())){
+
+      if ((event1 - event2)/ 60000 > timeSpan){
+       return newDate; 
+      } else {
+      return null;
+      }
+
+    } else if(event1.getHours() + (timeSpan / 60) < 22){
+        return newDate; 
+    } else if (event2.getHours - (timeSpan /60) > 7){
+        newDate = event2;
+        return newDate; 
+    } else {
+      return null; 
+    }
+  }
+
+  function createNewEvent(date,timeSpan,habit){
+    var start = new Date(date);
+    var end = new Date(date.setMinutes(date.getMinutes() + timeSpan));
+    console.log(start);
+    console.log(end);
+    var event = {
+      'summary': habit,
+      'description': 'Your GetGo goal!',
+      'start': {
+        'dateTime': start.toISOString(),
+        'timeZone': start.getTimezoneOffset()
+      },
+      'end': {
+        'dateTime': end.toISOString(),
+        'timeZone': end.getTimezoneOffset()
+      },
+    };
+
+    return event;
+
+   // events.insert('primary', );
+
+  }
+
 
 /**
  * Append a pre element to the body containing the given message
@@ -111,23 +163,12 @@ function listUpcomingEvents() {
  * @param {string} message Text to be placed in pre element.
  */
 
-function handleInputSubmit() {
-  // use Jquery to get inputs on page
-  var habit =jQuery("#habit").val();
-  var time = jQuery("#time").val();
-  console.log(habit);
-  console.log(time); 
-  // get calendar events for the next week
-  //scan through calendar events to find where to place new events
-  //send request to google to add new events
-  //display new events to user
-  return null;
-}
 
-function appendPre(message) {
-  //send message to display page
 
-  var pre = document.getElementById('output');
-  var textContent = document.createTextNode(message + '\n');
-  pre.appendChild(textContent);
-}
+// function appendPre(message) {
+//   //send message to display page
+
+//   var pre = document.getElementById('output');
+//   var textContent = document.createTextNode(message + '\n');
+//   pre.appendChild(textContent);
+// }
