@@ -10,7 +10,8 @@ function checkAuthLogin() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
 
     }, handleAuthResultLogin);
 }
@@ -20,9 +21,9 @@ function checkAuthInputs() {
     {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': true
-      
-      }, handleAuthResultInputs);
+      'immediate': true,
+      cookie_policy: 'single_host_origin'
+    }, handleAuthResultInputs);
 }
 
 function signOut() {
@@ -69,7 +70,7 @@ function handleAuthClick(event) {
 function handleInputSubmit() {
   // use Jquery to get inputs on page
   startCalendarScan();
-  
+
   // get calendar events for the next week
   //scan through calendar events to find where to place new events
   //send request to google to add new events
@@ -100,10 +101,10 @@ function listUpcomingEvents() {
     var events = resp.items;
     var habit =jQuery("#habit").val();
     var time = parseInt(jQuery("#time").val(), 10);
-    var start; 
-    var end;  
+    var start;
+    var end;
 
-    var newEvent; 
+    var newEvent;
     for (i = 1; i < events.length; i++){
       end = new Date(events[i - 1]["end"]["dateTime"]);
       start = new Date(events[i]["start"]["dateTime"]);
@@ -120,8 +121,8 @@ function listUpcomingEvents() {
 }
 
 function enoughTime(eventOne, eventTwo, timeSpan){
-    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15)); 
-    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15)); 
+    var event1 = new Date(eventOne.setMinutes(eventOne.getMinutes() + 15));
+    var event2 = new Date(eventTwo.setMinutes(eventTwo.getMinutes() + 15));
 
   if (event1.getDate()===(event2.getDate())){
     if ((event2 - event1)/ 60000 > timeSpan){
@@ -130,11 +131,11 @@ function enoughTime(eventOne, eventTwo, timeSpan){
       return null;
     }
   } else if(event1.getHours() + (timeSpan / 60) < 22){
-      return event1; 
+      return event1;
   } else if (event2.getHours() - (timeSpan /60) > 7){
-      return new Date(event2.setMinutes(event2.getMinutes() - timeSpan)); 
+      return new Date(event2.setMinutes(event2.getMinutes() - timeSpan));
   } else {
-    return null; 
+    return null;
   }
 }
 
@@ -173,15 +174,6 @@ function addToCalendar(event){
   });
 }
 
-function onHover()
-{
-    $("#menuImg").attr('src', 'http://i.imgur.com/T6pcuBK.png');
-}
-
-function offHover()
-{
-    $("#menuImg").attr('src', 'http://i.imgur.com/23tEUCZ.png?1');
-}
 
 /**
  * Append a pre element to the body containing the given message
@@ -189,4 +181,3 @@ function offHover()
  *
  * @param {string} message Text to be placed in pre element.
  */
-
